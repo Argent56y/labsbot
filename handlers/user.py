@@ -13,7 +13,7 @@ def get_main_menu_keyboard(user_id: int = 0):
     builder = InlineKeyboardBuilder()
     builder.button(text="👤 Мой профиль", callback_data="menu_profile")
     builder.button(text="📋 Очередь ОАиП", callback_data="menu_queue_oaip")
-    builder.button(text="📋 Очередь СИАП", callback_data="menu_queue_siap")
+    builder.button(text="📋 Очередь СЯП", callback_data="menu_queue_siap")
     builder.button(text="📋 Очередь Структуры", callback_data="menu_queue_structures")
     builder.button(text="✏️ Обновить лабы", callback_data="menu_update")
     if user_id == ADMIN_ID:
@@ -24,7 +24,7 @@ def get_main_menu_keyboard(user_id: int = 0):
 def get_update_subject_keyboard():
     builder = InlineKeyboardBuilder()
     builder.button(text="ОАиП", callback_data="update_subject_oaip")
-    builder.button(text="СИАП", callback_data="update_subject_siap")
+    builder.button(text="СЯП", callback_data="update_subject_siap")
     builder.button(text="Структуры", callback_data="update_subject_structures")
     builder.button(text="⬅️ Назад", callback_data="menu_back")
     builder.adjust(3, 1)
@@ -60,7 +60,7 @@ async def cmd_profile(message: types.Message):
         f"Статус: {role}\n\n"
         f"<b>Сданные лабораторные:</b>\n"
         f"ОАиП: {labs['oaip']}\n"
-        f"СИАП: {labs['siap']}\n"
+        f"СЯП: {labs['siap']}\n"
         f"Структуры: {labs['structures']}"
     )
     await message.answer(text, reply_markup=get_back_keyboard())
@@ -90,7 +90,7 @@ async def cb_profile(callback: types.CallbackQuery):
         f"Статус: {role}\n\n"
         f"<b>Сданные лабораторные:</b>\n"
         f"ОАиП: {labs['oaip']}\n"
-        f"СИАП: {labs['siap']}\n"
+        f"СЯП: {labs['siap']}\n"
         f"Структуры: {labs['structures']}"
     )
     await callback.message.edit_text(text, reply_markup=get_back_keyboard())

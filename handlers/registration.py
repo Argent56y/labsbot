@@ -52,7 +52,7 @@ async def process_oaip(message: types.Message, state: FSMContext):
         await message.answer("Пожалуйста, введи число.")
         return
     await state.update_data(oaip=int(message.text))
-    await message.answer("Хорошо. Сколько лабораторных по предмету <b>СИАП</b> у тебя уже сдано? (введи число)")
+    await message.answer("Хорошо. Сколько лабораторных по предмету <b>СЯП</b> у тебя уже сдано? (введи число)")
     await state.set_state(RegState.waiting_for_siap)
 
 @registration_router.message(RegState.waiting_for_siap)

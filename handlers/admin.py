@@ -17,7 +17,7 @@ def get_admin_menu_keyboard():
     builder = InlineKeyboardBuilder()
     builder.button(text="👥 Все студенты", callback_data="admin_all_users")
     builder.button(text="📋 Очередь ОАиП", callback_data="admin_queue_oaip")
-    builder.button(text="📋 Очередь СИАП", callback_data="admin_queue_siap")
+    builder.button(text="📋 Очередь СЯП", callback_data="admin_queue_siap")
     builder.button(text="📋 Очередь Структуры", callback_data="admin_queue_structures")
     builder.button(text="⬅️ Назад в главное меню", callback_data="menu_back")
     builder.adjust(1)
@@ -43,7 +43,7 @@ async def cb_all_users(callback: types.CallbackQuery):
 
     lines = ["<b>Список студентов:</b>"]
     for idx, u in enumerate(users, 1):
-        lines.append(f"{idx}. {u['last_name']} {u['first_name']} | ОАиП: {u['oaip']}, СИАП: {u['siap']}, Стр: {u['structures']}")
+        lines.append(f"{idx}. {u['last_name']} {u['first_name']} | ОАиП: {u['oaip']}, СЯП: {u['siap']}, Стр: {u['structures']}")
 
     builder = InlineKeyboardBuilder()
     builder.button(text="⬅️ Назад", callback_data="admin_back")

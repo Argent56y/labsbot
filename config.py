@@ -9,6 +9,6 @@ ADMIN_ID = int(os.getenv("ADMIN_ID", 0))
 # Subjects internal names and aliases
 SUBJECTS = {
     'oaip': 'ОАиП',
-    'siap': 'СИАП',
+    'siap': 'СЯП',
     'structures': 'Структуры'
 }
