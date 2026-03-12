@@ -21,6 +21,9 @@ async def init_db():
                 oaip INTEGER DEFAULT 0,
                 siap INTEGER DEFAULT 0,
                 structures INTEGER DEFAULT 0,
+                oaip_modifier REAL DEFAULT 0,
+                siap_modifier REAL DEFAULT 0,
+                structures_modifier REAL DEFAULT 0,
                 FOREIGN KEY(user_id) REFERENCES users(user_id)
             )
         ''')
@@ -34,6 +37,15 @@ async def init_db():
             )
         ''')
         # Insert admin if needed (optional)
+        
+        # Migrations for existing database
+        try:
+            await db.execute('ALTER TABLE labs ADD COLUMN oaip_modifier REAL DEFAULT 0')
+            await db.execute('ALTER TABLE labs ADD COLUMN siap_modifier REAL DEFAULT 0')
+            await db.execute('ALTER TABLE labs ADD COLUMN structures_modifier REAL DEFAULT 0')
+        except aiosqlite.OperationalError:
+            pass # Columns already exist
+
         await db.commit()
 
 async def add_user(user_id: int, username: str, first_name: str, last_name: str):

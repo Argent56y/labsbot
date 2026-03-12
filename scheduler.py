@@ -15,12 +15,21 @@ def is_week_2():
 
 async def broadcast_queue(bot: Bot, subject: str):
     logging.info(f"Broadcasting queue for {subject}")
-    text = await generate_queue_text(subject)
+    result = await generate_queue_text(subject)
+    if isinstance(result, tuple):
+        text, kb = result
+    else:
+        text = result
+        kb = None
+        
     users = await get_all_users_labs()
     # Also we could broadcast to a specific group, but since it's a bot, we send to all registered users
     for u in users:
         try:
-            await bot.send_message(u['user_id'], text)
+            if kb:
+                await bot.send_message(u['user_id'], text, reply_markup=kb)
+            else:
+                await bot.send_message(u['user_id'], text)
         except Exception as e:
             logging.error(f"Failed to send queue to {u['user_id']}: {e}")
 
