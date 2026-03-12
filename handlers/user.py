@@ -99,15 +99,15 @@ async def cb_profile(callback: types.CallbackQuery):
 @user_router.callback_query(F.data.startswith("menu_queue_"))
 async def cb_queue(callback: types.CallbackQuery):
     subject = callback.data.replace("menu_queue_", "")
-    result = await generate_queue_text(subject)
-    if isinstance(result, tuple):
-        text, _ = result
-    else:
-        text = result
+    text, kb = await generate_queue_text(subject)
+    
+    # We will ignore kb which contains the buyout button and build our own simple back button
+    # OR we can just use kb if it has the back button? Wait, get_buyout_keyboard doesn't have a back button.
     builder = InlineKeyboardBuilder()
-    builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
+    # builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
     builder.button(text="⬅️ Назад в меню", callback_data="menu_back")
     builder.adjust(1)
+    
     await callback.message.edit_text(text, reply_markup=builder.as_markup())
     await callback.answer()
 

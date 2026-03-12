@@ -68,7 +68,7 @@ async def process_buyout(callback: types.CallbackQuery):
         text = result
     
     builder = InlineKeyboardBuilder()
-    builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
+    # builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
     builder.button(text="⬅️ Назад в меню", callback_data="menu_back")
     builder.adjust(1)
     await callback.message.edit_text(text, reply_markup=builder.as_markup())

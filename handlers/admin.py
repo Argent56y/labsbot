@@ -10,7 +10,7 @@ def get_is_admin(user_id: int) -> bool:
 
 async def get_buyout_keyboard(subject: str):
     builder = InlineKeyboardBuilder()
-    builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
+    # builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
     return builder.as_markup()
 
 def get_admin_menu_keyboard():
@@ -64,7 +64,7 @@ async def cb_admin_queue(callback: types.CallbackQuery):
     text, kb = await generate_queue_text(subject)
     # Add back button
     builder = InlineKeyboardBuilder()
-    builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
+    # builder.button(text="⭐ Выкупить очередь (Сдвиг вверх)", callback_data=f"buyout_{subject}")
     builder.button(text="⬅️ Назад", callback_data="admin_back")
     builder.adjust(1)
     await callback.message.edit_text(text, reply_markup=builder.as_markup())
