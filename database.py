@@ -154,6 +154,20 @@ async def reset_modifiers(subject: str):
         await db.execute(f'UPDATE labs SET {subject}_modifier = 0')
         await db.commit()
 
+async def set_modifier(user_id: int, subject: str, value: float):
+    async with aiosqlite.connect(DB_NAME) as db:
+        await db.execute(f'''
+            UPDATE labs SET {subject}_modifier = ? WHERE user_id = ?
+        ''', (value, user_id))
+        await db.commit()
+
+async def admin_update_labs(user_id: int, subject: str, count: int):
+    async with aiosqlite.connect(DB_NAME) as db:
+        await db.execute(f'''
+            UPDATE labs SET {subject} = ? WHERE user_id = ?
+        ''', (count, user_id))
+        await db.commit()
+
 async def get_unresolved_confirmations_older_than(hours: int = 24):
     async with aiosqlite.connect(DB_NAME) as db:
         db.row_factory = aiosqlite.Row
